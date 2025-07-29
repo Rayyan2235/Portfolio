@@ -83,13 +83,13 @@ function TypingEffect() {
         fontFamily: "'Press Start 2P', monospace",
         fontSize: "1.1rem",
         margin: "2rem auto",
-        boxShadow: "0 0 16px #00ffe7, 0 0 32px #222831",
-        border: "3px solid #00ffe7",
+        boxShadow: "0 0 16px #ff0099, 0 0 32px #222831",
+        border: "3px solid #ff0099",
         textShadow: "0 0 4px #00ffe7, 0 0 8px #00ffe7",
         letterSpacing: "1.5px",
       }}
     >
-      <span style={{ color: "#ff0099", marginRight: 8 }}>{">"}</span>
+      <span style={{ color: "pink", marginRight: 8 }}>{">"}</span>
       <Typewriter
         words={[
           " Player: Aspiring Developer",
@@ -192,7 +192,7 @@ function Portfolio() {
               zIndex: 1000, // Appears above all other content
               background: "rgba(0, 0, 0, 0.95)", // Semi-transparent black
               backdropFilter: "blur(15px)", // Glassmorphism effect
-              padding: "1rem 2rem",
+              padding: "1.5rem",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -428,26 +428,29 @@ function Portfolio() {
                 display: "flex", 
                 alignItems: "center", 
                 justifyContent: "space-between",
-                padding: "2rem 5rem",
+                paddingTop: "2rem",
+                paddingBottom:"2rem",
                 maxWidth: "1200px",
                 margin: "0 auto",
-                paddingBottom: "8rem",
+
                 minHeight: "80vh"
+                
               }}
             >
               {/* Left side - Intro text */}
-              <div style={{ flex: "1", paddingRight: "2.5rem"}}>
+              <div style={{ flex: "1", paddingRight: "2.5rem", height:"2 rem"}}>
                 <h1 style={{ 
-                  fontSize: "3rem", 
+                  fontSize: "3.6rem", 
                   fontWeight: "bold", 
                   color: "#fff",
                   marginBottom: "1rem"
+                  
                 }}>
                   Hi There, I'm{" "}
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{ 
-                  fontSize: "1.5rem", 
+                  fontSize: "1.75rem", 
                   color: "#ccc",
                   marginBottom: "2rem"
                 }}>
@@ -461,10 +464,10 @@ function Portfolio() {
                   imageSrc={profilePics}
                   altText={false}
                   captionText={false}
-                  containerHeight="300px"
+                  containerHeight="390px"
                   containerWidth="300px"
-                  imageHeight="300px"
-                  imageWidth="300px"
+                  imageHeight="350px"
+                  imageWidth="350px"
                   rotateAmplitude={12}
                   scaleOnHover={1.12}
                   showMobileWarning={false}
@@ -480,14 +483,13 @@ function Portfolio() {
               </h2>
               <div className="center" style={{ width: "60%", margin: "0 auto", fontSize: "20px" }}>
                 <ShinyText 
-                  text="Hello Earthling, my name is Rayyan Syed and I am an aspiring SWE on his mission to secure it in the big tech and cook up an absolute storm for the Tech world. So Watch out!!" 
+                  text="Welcome Player 2. ’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges.
+Loading skills… 75%... almost there." 
                   disabled={false} 
                   speed={3} 
                   className='center'
                 />
-                // Sort out About me Text
-                // Fix Padding issues
-                // the typing effect, make sure theres pink text
+                
             </div>
             </section>
 
