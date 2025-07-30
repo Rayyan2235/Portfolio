@@ -6,7 +6,7 @@ import { FaGithub, FaLess, FaLinkedin, FaGamepad } from "react-icons/fa"
 import { HiOutlineMail } from "react-icons/hi"
 import { MdSports, MdSportsSoccer } from "react-icons/md"
 import { Typewriter } from "react-simple-typewriter"
-import profilePics from "./assets/goat.png"
+import profilePics from "./assets/candid.png"
 import "./background.css"
 import TiltedCard from "../Reactbits/TiltedCard/TiltedCard";
 import ShinyText from "../Reactbits/ShinyText/ShinyText";
@@ -83,13 +83,13 @@ function TypingEffect() {
         fontFamily: "'Press Start 2P', monospace",
         fontSize: "1.1rem",
         margin: "2rem auto",
-        boxShadow: "0 0 16px #00ffe7, 0 0 32px #222831",
-        border: "3px solid #00ffe7",
+        boxShadow: "0 0 16px #ff0099, 0 0 32px #222831",
+        border: "3px solid #ff0099",
         textShadow: "0 0 4px #00ffe7, 0 0 8px #00ffe7",
         letterSpacing: "1.5px",
       }}
     >
-      <span style={{ color: "#ff0099", marginRight: 8 }}>{">"}</span>
+      <span style={{ color: "pink", marginRight: 8 }}>{">"}</span>
       <Typewriter
         words={[
           " Player: Aspiring Developer",
@@ -135,14 +135,28 @@ function Portfolio() {
 
   // SMOOTH SCROLL FUNCTION - This handles clicking on navbar buttons
   const scrollToSection = (sectionId) => {
+    console.log(`🔍 Attempting to scroll to: ${sectionId}`) // Debug log
+    
     const attemptScroll = (retries = 5) => {
       const element = document.getElementById(sectionId)
   
       if (element) {
-        const navbarHeight = 100 // Adjust this if your nav bar height changes
+        console.log(`✅ Found element: ${sectionId}`) // Debug log
+        
+        // Use scroll-margin-top from CSS (120px) instead of hardcoded value
+        const navbarHeight = 120 // Match the scroll-margin-top in CSS
         const elementPosition = element.offsetTop - navbarHeight
-        window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+        
+        // Alternative method - use scrollIntoView for better browser compatibility
+        element.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        })
+        
+        console.log(`📍 Scrolled to element at position: ${elementPosition}`) // Debug log
       } else if (retries > 0) {
+        console.log(`⏳ Element not found, retrying... (${retries} attempts left)`) // Debug log
         setTimeout(() => attemptScroll(retries - 1), 100)
       } else {
         console.error(`❌ Could not find element with ID: ${sectionId}`)
@@ -178,7 +192,7 @@ function Portfolio() {
               zIndex: 1000, // Appears above all other content
               background: "rgba(0, 0, 0, 0.95)", // Semi-transparent black
               backdropFilter: "blur(15px)", // Glassmorphism effect
-              padding: "1rem 2rem",
+              padding: "1.5rem",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -214,9 +228,12 @@ function Portfolio() {
               gap: "1.5rem",
               alignItems: "center"
             }}>
-              {/* ABOUT BUTTON */}
+              {/* ABOUT BUTTON - FIXED: removed parameter from onClick */}
               <button
-                onClick={() => scrollToSection('about-section')} // Scroll to About Me section
+                onClick={() => {
+                  console.log('🖱️ About button clicked') // Debug log
+                  scrollToSection('about-section')
+                }}
                 style={{
                   background: "transparent",
                   border: "2px solid #00ffe7",
@@ -245,7 +262,10 @@ function Portfolio() {
 
               {/* PROJECTS BUTTON */}
               <button
-                onClick={() => scrollToSection('projects-section')} // Scroll to Projects section
+                onClick={() => {
+                  console.log('🖱️ Projects button clicked') // Debug log
+                  scrollToSection('projects-section')
+                }}
                 style={{
                   background: "transparent",
                   border: "2px solid #ff0099",
@@ -408,26 +428,29 @@ function Portfolio() {
                 display: "flex", 
                 alignItems: "center", 
                 justifyContent: "space-between",
-                padding: "2rem 5rem",
+                paddingTop: "2rem",
+                paddingBottom:"2rem",
                 maxWidth: "1200px",
                 margin: "0 auto",
-                paddingBottom: "8rem",
+
                 minHeight: "80vh"
+                
               }}
             >
               {/* Left side - Intro text */}
-              <div style={{ flex: "1", paddingRight: "2.5rem"}}>
+              <div style={{ flex: "1", paddingRight: "2.5rem", height:"2 rem"}}>
                 <h1 style={{ 
-                  fontSize: "3rem", 
+                  fontSize: "3.6rem", 
                   fontWeight: "bold", 
                   color: "#fff",
                   marginBottom: "1rem"
+                  
                 }}>
                   Hi There, I'm{" "}
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{ 
-                  fontSize: "1.5rem", 
+                  fontSize: "1.75rem", 
                   color: "#ccc",
                   marginBottom: "2rem"
                 }}>
@@ -441,10 +464,10 @@ function Portfolio() {
                   imageSrc={profilePics}
                   altText={false}
                   captionText={false}
-                  containerHeight="300px"
+                  containerHeight="390px"
                   containerWidth="300px"
-                  imageHeight="300px"
-                  imageWidth="300px"
+                  imageHeight="350px"
+                  imageWidth="350px"
                   rotateAmplitude={12}
                   scaleOnHover={1.12}
                   showMobileWarning={false}
@@ -460,11 +483,13 @@ function Portfolio() {
               </h2>
               <div className="center" style={{ width: "60%", margin: "0 auto", fontSize: "20px" }}>
                 <ShinyText 
-                  text="Hello Earthling, my name is Rayyan Syed and I am an aspiring SWE on his mission to secure it in the big tech and cook up an absolute storm for the Tech world. So Watch out!!" 
+                  text="Welcome Player 2. I’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges.
+Loading skills… 75%... almost there." 
                   disabled={false} 
                   speed={3} 
                   className='center'
                 />
+                
             </div>
             </section>
 
@@ -495,7 +520,43 @@ function Portfolio() {
                   className="center"
                   style={{ display: "flex", gap: "4rem", justifyContent: "center", flexWrap: "wrap" }}
                 >
-                  <div className="card">
+
+                  <div className="card" style={{
+                    border: "2px solid #ff0099",
+                    boxShadow: "0 4px 16px #ff0099",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  > 
+                    <h3 className="font"> EmpathAI</h3>
+                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face, </p>
+
+                  
+                  </div>
+
+
+
+                  <div className="card" style={{
+                    border: "2px solid #00ffe7",
+                    boxShadow: "0 4px 16px #00ffe7",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <b>
                       <h3 className="text-xl font-semibold font size:12">AI Study Planner </h3>
                     </b>
@@ -505,7 +566,20 @@ function Portfolio() {
                       achieving 95% response accuracy.
                     </p>
                   </div>
-                  <div className="card">
+                  <div className="card" style={{
+                    border: "2px solid #ff0099",
+                    boxShadow: "0 4px 16px #ff0099",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <b>
                       <h3 className="center font">AI Expense Tracker</h3>
                     </b>
@@ -531,7 +605,20 @@ function Portfolio() {
                   Activities & Leadership
                 </h2>
                 <div className="center" style={{ display: "flex", gap: "4rem", justifyContent: "center", flexWrap: "wrap" }}>
-                  <div className="card">
+                <div className="card" style={{
+                    border: "2px solid #00ffe7",
+                    boxShadow: "0 4px 16px  #00ffe7",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <h3 className="font"> Advisor of The Indian Social Outreach</h3>
                     <p>
                       As the advisor for the Indian Social, I led resource allocation and event planning for three key
@@ -539,7 +626,20 @@ function Portfolio() {
                       planning, ensuring smooth execution and timely delivery.
                     </p>
                   </div>
-                  <div className="card">
+                  <div className="card" style={{
+                    border: "2px solid #ff0099",
+                    boxShadow: "0 4px 16px #ff0099",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <h3 className="font"> Penn State THON</h3>
                     <p>
                       Engaged in outreach and fundraising efforts, collaborating with a diverse team to help raise
@@ -562,14 +662,20 @@ function Portfolio() {
                   Life Outside of Code
                 </h2>
                 <div className="center" style={{ display: "flex", gap: "4rem", justifyContent: "center", flexWrap: "wrap" }}>
-                  <div className="card" style={{ 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    alignItems: "center",
-                    textAlign: "center",
-                    transition: "all 0.3s ease",
-                    borderColor: "#ff0099"
-                  }}>
+                <div className="card" style={{
+                    border: "2px solid #00ffe7",
+                    boxShadow: "0 4px 16px  #00ffe7",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <div style={{ 
                       fontSize: "3rem", 
                       marginBottom: "1rem",
@@ -578,7 +684,7 @@ function Portfolio() {
                     }}>
                       <MdSportsSoccer />
                     </div>
-                    <h3 className="font" style={{ color: "#ff0099", marginBottom: "1rem" }}>
+                    <h3 className="font" style={{ marginBottom: "1rem" }}>
                       Manchester United Fan
                     </h3>
                     <p style={{ color: "#fff" }}>
@@ -587,14 +693,20 @@ function Portfolio() {
                     </p>
                   </div>
                   
-                  <div className="card" style={{ 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    alignItems: "center",
-                    textAlign: "center",
-                    transition: "all 0.3s ease",
-                    borderColor: "#00ffe7"
-                  }}>
+                  <div className="card" style={{
+                    border: "2px solid #ff0099",
+                    boxShadow: "0 4px 16px #ff0099",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <div style={{ 
                       fontSize: "3rem", 
                       marginBottom: "1rem",
@@ -626,13 +738,39 @@ function Portfolio() {
                   Reach Me On 
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 center">
-                  <div className="card center">
+                <div className="card" style={{
+                    border: "2px solid #ff0099",
+                    boxShadow: "0 4px 16px #ff0099",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <p>
                       <h3 className="font">US Number:</h3>
                       +1 (717) 648 7215
                     </p>
                   </div>
-                  <div className="card center">
+                  <div className="card" style={{
+                    border: "2px solid #00ffe7",
+                    boxShadow: "0 4px 16px  #00ffe7",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1.025)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
+                    e.currentTarget.style.transform = "scale(1)"
+                  }}
+                  >
                     <p>
                       <h3 className="font"> Dubai Number:</h3>
                       +971 50 581 6195
