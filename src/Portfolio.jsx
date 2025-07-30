@@ -483,7 +483,7 @@ function Portfolio() {
               </h2>
               <div className="center" style={{ width: "60%", margin: "0 auto", fontSize: "20px" }}>
                 <ShinyText 
-                  text="Welcome Player 2. ’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges.
+                  text="Welcome Player 2. I’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges.
 Loading skills… 75%... almost there." 
                   disabled={false} 
                   speed={3} 
