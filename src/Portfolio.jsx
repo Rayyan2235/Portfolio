@@ -535,7 +535,7 @@ function Portfolio() {
                   }}
                   > 
                     <h3 className="font"> EmpathAI</h3>
-                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face, </p>
+                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face. Uses Livekit tooks to allow verbal conversation with the AI therapist. </p>
 
                   
                   </div>
@@ -585,8 +585,7 @@ function Portfolio() {
                     <p>
                       Developed a full-stack expense tracking app with a Python backend and React frontend, featuring
                       AI-powered categorization for 80% improved accuracy. Optimized backend with FastAPI and JWT,
-                      boosting performance by 30%, and cut API latency by 40% using Axios and WebSockets for real-time
-                      updates.
+                      boosting performance by 30%.
                     </p>
                   </div>
                 </div>
