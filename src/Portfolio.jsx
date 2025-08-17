@@ -717,8 +717,7 @@ function Portfolio() {
                       Gaming Enthusiast
                     </h3>
                     <p style={{ color: "#fff" }}>
-                      When I'm not coding, you'll find me immersed in the latest games. From competitive multiplayer 
-                      to story-driven adventures, gaming helps me unwind and often inspires creative solutions for my projects.
+                      When I'm not coding, you'll find me immersed in games like CS2, Valorant and Fortnite. Gaming helps me unwind and often inspires creative solutions for my projects.
                     </p>
                   </div>
                 </div>
