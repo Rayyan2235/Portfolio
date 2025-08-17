@@ -483,8 +483,7 @@ function Portfolio() {
               </h2>
               <div className="center" style={{ width: "60%", margin: "0 auto", fontSize: "20px" }}>
                 <ShinyText 
-                  text="Welcome Player 2. I’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges.
-Loading skills… 75%... almost there." 
+                  text="Welcome Player 2. I’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges." 
                   disabled={false} 
                   speed={3} 
                   className='center'
@@ -536,7 +535,7 @@ Loading skills… 75%... almost there."
                   }}
                   > 
                     <h3 className="font"> EmpathAI</h3>
-                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face, </p>
+                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face. Uses Livekit tooks to allow verbal conversation with the AI therapist. </p>
 
                   
                   </div>
@@ -586,8 +585,7 @@ Loading skills… 75%... almost there."
                     <p>
                       Developed a full-stack expense tracking app with a Python backend and React frontend, featuring
                       AI-powered categorization for 80% improved accuracy. Optimized backend with FastAPI and JWT,
-                      boosting performance by 30%, and cut API latency by 40% using Axios and WebSockets for real-time
-                      updates.
+                      boosting performance by 30%.
                     </p>
                   </div>
                 </div>
@@ -719,8 +717,7 @@ Loading skills… 75%... almost there."
                       Gaming Enthusiast
                     </h3>
                     <p style={{ color: "#fff" }}>
-                      When I'm not coding, you'll find me immersed in the latest games. From competitive multiplayer 
-                      to story-driven adventures, gaming helps me unwind and often inspires creative solutions for my projects.
+                      When I'm not coding, you'll find me immersed in games like CS2, Valorant and Fortnite. Gaming helps me unwind and often inspires creative solutions for my projects.
                     </p>
                   </div>
                 </div>
