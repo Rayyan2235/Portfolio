@@ -8,9 +8,155 @@ import { MdSports, MdSportsSoccer } from "react-icons/md"
 import { Typewriter } from "react-simple-typewriter"
 import profilePics from "./assets/candid.png"
 import "./background.css"
+import "./redesign.css"
 import TiltedCard from "../Reactbits/TiltedCard/TiltedCard";
-import ShinyText from "../Reactbits/ShinyText/ShinyText";
 import Starfield from "./Starfield" // Starry background with shooting stars
+
+/* ============================================================
+   RESUME DATA — single source of truth (edit here to update)
+   ============================================================ */
+const EXPERIENCE = [
+  {
+    company: "CodePath | Anthropic",
+    role: "Applied AI Engineering",
+    location: "Remote",
+    date: "May 2026 – Present",
+    rank: "S-RANK",
+    accent: "gold",
+    points: [
+      "Navigated enterprise codebases with AI-assisted tools, cutting issue reproduction time by 60% via structured debugging.",
+      "Shipped production-grade PRs with full test coverage across all 4 phase deliverables in a 10-week capstone.",
+      "Collaborated with open-source maintainers, iterating from issue selection to merged PR.",
+    ],
+  },
+  {
+    company: "Nittany Motorsports",
+    role: "Applied Data Science Engineer",
+    location: "University Park, PA",
+    date: "Dec 2025 – Present",
+    rank: "A-RANK",
+    accent: "cyan",
+    points: [
+      "Built a Grafana analytics dashboard over 10+ sensor streams (speed, RPM, temps), cutting post-session analysis from 30 min to under 5.",
+      "Automated GitHub-to-Grafana ingestion via Python, eliminating manual uploads across 3+ vehicle subsystems.",
+      "Raised data consistency to 95% schema compliance by standardizing inconsistent DAQ CSV formats.",
+    ],
+  },
+  {
+    company: "Englishly",
+    role: "Software Engineer Intern",
+    location: "Jeddah, Saudi Arabia",
+    date: "May 2025 – May 2026",
+    rank: "A-RANK",
+    accent: "pink",
+    points: [
+      "Built an AI-powered English tutor for Arabic speakers (React, AWS Lambda, Python NLP) with under 400ms real-time latency.",
+      "Improved Arabic-accented transcription accuracy by 35% by fine-tuning OpenAI Whisper and integrating a LiveKit AI avatar.",
+      "Optimized a FastAPI feedback pipeline with async queues, cutting manual corrections by 40% and boosting retention by 25%.",
+    ],
+  },
+  {
+    company: "Freelance",
+    role: "Web Developer",
+    location: "University Park, PA",
+    date: "Jun 2025 – Dec 2025",
+    rank: "B-RANK",
+    accent: "green",
+    points: [
+      "Built interactive portals for Penn State student clubs (React, TailwindCSS, Firebase), increasing event participation by 40%.",
+      "Implemented dynamic polls, calendar scheduling, and cloud dashboards with Firestore triggers, lifting recurring traffic 25%.",
+    ],
+  },
+  {
+    company: "NomadAI",
+    role: "Software Engineer Intern",
+    location: "Remote",
+    date: "Nov 2024 – Feb 2025",
+    rank: "B-RANK",
+    accent: "cyan",
+    points: [
+      "Formulated an AI-driven itinerary generator that cut trip-planning time by 30% through real-time data processing.",
+      "Designed the matching engine with Python REST, JavaScript, and NLP libraries (spaCy, OpenAI) to analyze travel patterns.",
+    ],
+  },
+]
+
+const PROJECTS = [
+  {
+    name: "Fantasy Premier League Match Predictor",
+    accent: "pink",
+    date: "Aug 2025 – Present",
+    points: [
+      "Engineering an EPL match-prediction system with rolling averages and historical metrics, improving baseline accuracy by 15%.",
+      "Built a full-stack app (FastAPI, React, PostgreSQL) with dynamic dashboards and cross-validation to reduce model variance.",
+    ],
+    tech: ["Python", "Scikit-Learn", "PyTorch", "FastAPI", "React", "PostgreSQL", "AWS"],
+  },
+  {
+    name: "EmpathAI",
+    accent: "cyan",
+    date: "May 2025 – Aug 2025",
+    points: [
+      "Built a full-stack AI Therapist (FastAPI, React, LLaMA 3 via Ollama) enabling secure real-time voice therapy at sub-400ms latency with 95% crisis-detection accuracy.",
+      "Engineered emotion & sentiment monitoring with Hugging Face and low-latency bidirectional audio via LiveKit.",
+    ],
+    tech: ["Python", "Ollama", "LLaMA 3", "React", "FastAPI", "LiveKit", "Hugging Face", "NLP"],
+  },
+]
+
+const SKILLS = [
+  { name: "Languages", level: 90, accent: "cyan", items: ["Python", "Java", "JavaScript", "SQL", "C", "Verilog", "HTML/CSS"] },
+  { name: "Frameworks", level: 85, accent: "pink", items: ["React", "Node.js", "FastAPI", "Spring Boot", "Tailwind", "Flask", "PyTorch"] },
+  { name: "ML / Data", level: 80, accent: "gold", items: ["Scikit-Learn", "Hugging Face", "OpenAI", "Ollama", "Pandas", "NumPy", "Matplotlib"] },
+  { name: "Cloud & DevOps", level: 75, accent: "green", items: ["AWS (Lambda, S3)", "LiveKit", "Docker", "GitHub Actions", "Unix/Linux"] },
+]
+
+/* Reusable section title */
+function SectionTitle({ title, subtitle }) {
+  return (
+    <>
+      <h2 className="rd-title">{title}</h2>
+      {subtitle && <p className="rd-subtitle">{subtitle}</p>}
+    </>
+  )
+}
+
+/* Pixel tech chips */
+function Chips({ items, accent }) {
+  return (
+    <div className={`chips panel-${accent}`}>
+      {items.map((t) => (
+        <span key={t} className="chip">{t}</span>
+      ))}
+    </div>
+  )
+}
+
+/* Animated XP / stat bar (fills when scrolled into view) */
+function SkillBar({ name, level, accent, items }) {
+  return (
+    <div className={`skill-block panel-${accent}`}>
+      <div className="skill-row">
+        <span className="skill-name">{name}</span>
+        <span className="skill-lvl">LV {level}</span>
+      </div>
+      <div className="xp-track">
+        <motion.div
+          className="xp-fill"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, ease: "easeOut" }}
+        />
+      </div>
+      <div className="chips" style={{ marginTop: "0.6rem" }}>
+        {items.map((t) => (
+          <span key={t} className="chip">{t}</span>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 // Gaming Background Component - Creates floating geometric shapes and circuit patterns
 function GamingBackground() {
@@ -223,132 +369,48 @@ function Portfolio() {
             </h1>
 
             {/* NAVIGATION MENU - Buttons to scroll to different sections */}
-            <div style={{ 
-              display: "flex", 
-              gap: "1.5rem",
-              alignItems: "center"
+            <div style={{
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
+              flexWrap: "wrap"
             }}>
-              {/* ABOUT BUTTON - FIXED: removed parameter from onClick */}
-              <button
-                onClick={() => {
-                  console.log('🖱️ About button clicked') // Debug log
-                  scrollToSection('about-section')
-                }}
-                style={{
-                  background: "transparent",
-                  border: "2px solid #00ffe7",
-                  color: "#00ffe7",
-                  padding: "0.6rem 1.2rem",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
-                  transition: "all 0.3s ease",
-                  textShadow: "0 0 5px #00ffe7"
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = "#00ffe7"
-                  e.target.style.color = "#000"
-                  e.target.style.boxShadow = "0 0 15px #00ffe7"
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "transparent"
-                  e.target.style.color = "#00ffe7"
-                  e.target.style.boxShadow = "none"
-                }}
-              >
-                About
-              </button>
-
-              {/* PROJECTS BUTTON */}
-              <button
-                onClick={() => {
-                  console.log('🖱️ Projects button clicked') // Debug log
-                  scrollToSection('projects-section')
-                }}
-                style={{
-                  background: "transparent",
-                  border: "2px solid #ff0099",
-                  color: "#ff0099",
-                  padding: "0.6rem 1.2rem",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
-                  transition: "all 0.3s ease",
-                  textShadow: "0 0 5px #ff0099"
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = "#ff0099"
-                  e.target.style.color = "#000"
-                  e.target.style.boxShadow = "0 0 15px #ff0099"
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "transparent"
-                  e.target.style.color = "#ff0099"
-                  e.target.style.boxShadow = "none"
-                }}
-              >
-                Projects
-              </button>
-
-              {/* ACTIVITIES BUTTON */}
-              <button
-                onClick={() => scrollToSection('activities-section')} // Scroll to Activities section
-                style={{
-                  background: "transparent",
-                  border: "2px solid gold",
-                  color: "gold",
-                  padding: "0.6rem 1.2rem",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
-                  transition: "all 0.3s ease",
-                  textShadow: "0 0 5px gold"
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = "gold"
-                  e.target.style.color = "#000"
-                  e.target.style.boxShadow = "0 0 15px gold"
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "transparent"
-                  e.target.style.color = "gold"
-                  e.target.style.boxShadow = "none"
-                }}
-              >
-                Activities
-              </button>
-
-              {/* LIFE BUTTON */}
-              <button
-                onClick={() => scrollToSection('life-section')} // Scroll to Life section
-                style={{
-                  background: "transparent",
-                  border: "2px solid #32cd32",
-                  color: "#32cd32",
-                  padding: "0.6rem 1.2rem",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
-                  transition: "all 0.3s ease",
-                  textShadow: "0 0 5px #32cd32"
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = "#32cd32"
-                  e.target.style.color = "#000"
-                  e.target.style.boxShadow = "0 0 15px #32cd32"
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "transparent"
-                  e.target.style.color = "#32cd32"
-                  e.target.style.boxShadow = "none"
-                }}
-              >
-                Life
-              </button>
+              {[
+                { label: "About", id: "about-section", color: "#00ffe7" },
+                { label: "Experience", id: "experience-section", color: "#ffd447" },
+                { label: "Projects", id: "projects-section", color: "#ff0099" },
+                { label: "Skills", id: "skills-section", color: "#32cd32" },
+                { label: "Contact", id: "contact-section", color: "#00ffe7" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  style={{
+                    background: "transparent",
+                    border: `2px solid ${item.color}`,
+                    color: item.color,
+                    padding: "0.55rem 1rem",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: "0.85rem",
+                    fontWeight: "bold",
+                    transition: "all 0.3s ease",
+                    textShadow: `0 0 5px ${item.color}`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = item.color
+                    e.target.style.color = "#000"
+                    e.target.style.boxShadow = `0 0 15px ${item.color}`
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = "transparent"
+                    e.target.style.color = item.color
+                    e.target.style.boxShadow = "none"
+                  }}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
 
             {/* SOCIAL MEDIA ICONS */}
@@ -439,23 +501,38 @@ function Portfolio() {
             >
               {/* Left side - Intro text */}
               <div style={{ flex: "1", paddingRight: "2.5rem", height:"2 rem"}}>
-                <h1 style={{ 
-                  fontSize: "3.6rem", 
-                  fontWeight: "bold", 
+                <p style={{ fontFamily: "'Press Start 2P', monospace", color: "#00ffe7", fontSize: "0.8rem", marginBottom: "1rem", textShadow: "0 0 8px #00ffe7" }}>
+                  PLAYER 1 CONNECTED
+                </p>
+                <h1 style={{
+                  fontSize: "3.6rem",
+                  fontWeight: "bold",
                   color: "#fff",
                   marginBottom: "1rem"
-                  
+
                 }}>
                   Hi There, I'm{" "}
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
-                <p style={{ 
-                  fontSize: "1.75rem", 
+                <p style={{
+                  fontSize: "1.5rem",
                   color: "#ccc",
-                  marginBottom: "2rem"
+                  marginBottom: "1rem",
+                  fontFamily: "Inter, system-ui, sans-serif"
                 }}>
-                  I Am Into Full-Stack Development, & Working With AI/ML
+                  Software Engineer building full-stack apps &amp; applied AI/ML.
                 </p>
+                <p style={{ fontSize: "0.95rem", color: "#9aa0b5", marginBottom: "2rem", fontFamily: "Inter, system-ui, sans-serif" }}>
+                  B.S. Computer Science (Engineering) @ Penn State &middot; Class of 2027
+                </p>
+                <a
+                  className="rd-btn"
+                  href="https://github.com/rayyan2235"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  &gt; VIEW GITHUB
+                </a>
               </div>
 
               {/* Right side - Profile image */}
@@ -477,19 +554,18 @@ function Portfolio() {
             </div>
            
             {/* ABOUT ME SECTION */}
-            <section id="about-section" style={{ padding: "4rem 0" }}>
-            <h2 className="center font" style={{ color: "gold", textShadow: "0 0 20px gold", fontSize: "2.5rem", marginBottom: "2rem" }}>
-                About Me
-              </h2>
-              <div className="center" style={{ width: "60%", margin: "0 auto", fontSize: "20px" }}>
-                <ShinyText 
-                  text="Welcome Player 2. I’m Rayyan Syed, an aspiring Software Engineer on a mission to level up and break into big tech. Obsessed with clean code, clever systems, and boss-level challenges." 
-                  disabled={false} 
-                  speed={3} 
-                  className='center'
-                />
-                
-            </div>
+            <section id="about-section" className="rd rd-section">
+              <SectionTitle title="About Me" subtitle="// player profile" />
+              <div className="panel panel-cyan" style={{ maxWidth: "780px" }}>
+                <p style={{ color: "#d4d7e6", fontSize: "1rem", margin: 0 }}>
+                  I'm a Computer Science (Engineering) student at Penn State and a software
+                  engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
+                  <b style={{ color: "#fff" }}> applied AI/ML</b>. I've shipped production features
+                  across startups and open source &mdash; from real-time voice AI and NLP pipelines
+                  to data dashboards and full-stack web apps. I care about clean code, low latency,
+                  and shipping things people actually use.
+                </p>
+              </div>
             </section>
 
             {/* TYPING EFFECT SECTION */}
@@ -505,91 +581,77 @@ function Portfolio() {
               <TypingEffect />
             </div>
 
-            {/* PROJECTS SECTION */}
-            <section id="projects-section" style={{ padding: "4rem 0" }}>
+            {/* EXPERIENCE SECTION - quest log timeline */}
+            <section id="experience-section" className="rd rd-section">
+              <SectionTitle title="Experience" subtitle="// quest log — cleared missions" />
               <motion.div
+                className="quest-log"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
               >
-                <h2 className="center font" style={{ color: "gold", textShadow: " 0 0 20px gold", fontSize: "2.5rem", marginBottom: "3rem" }}>
-                  My Projects
-                </h2>
-                <div
-                  className="center"
-                  style={{ display: "flex", gap: "4rem", justifyContent: "center", flexWrap: "wrap" }}
-                >
-
-                  <div className="card" style={{
-                    border: "2px solid #ff0099",
-                    boxShadow: "0 4px 16px #ff0099",
-                    transition: "all 0.3s ease"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
-                    e.currentTarget.style.transform = "scale(1.025)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
-                    e.currentTarget.style.transform = "scale(1)"
-                  }}
-                  > 
-                    <h3 className="font"> EmpathAI</h3>
-                    <p> This is an AI Therapist that uses reactjs, Python and NLP models like Hugging face. Uses Livekit tooks to allow verbal conversation with the AI therapist. </p>
-
-                  
+                {EXPERIENCE.map((job) => (
+                  <div key={job.company} className={`quest panel-${job.accent}`}>
+                    <div className="panel-head">
+                      <h3 className="panel-title">
+                        {job.company}
+                        <span className="rank">{job.rank}</span>
+                      </h3>
+                      <span className="panel-date">{job.date}</span>
+                    </div>
+                    <span className="panel-sub">{job.role} &middot; {job.location}</span>
+                    <ul>
+                      {job.points.map((p, i) => <li key={i}>{p}</li>)}
+                    </ul>
                   </div>
-
-
-
-                  <div className="card" style={{
-                    border: "2px solid #00ffe7",
-                    boxShadow: "0 4px 16px #00ffe7",
-                    transition: "all 0.3s ease"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
-                    e.currentTarget.style.transform = "scale(1.025)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
-                    e.currentTarget.style.transform = "scale(1)"
-                  }}
-                  >
-                    <b>
-                      <h3 className="text-xl font-semibold font size:12">AI Study Planner </h3>
-                    </b>
-                    <p>
-                      Developed a dynamic AI-powered task and study planner with a React frontend and Python backend,
-                      enhancing productivity by 15%. Integrated a chatbot using the Ollama API and LangChain,
-                      achieving 95% response accuracy.
-                    </p>
-                  </div>
-                  <div className="card" style={{
-                    border: "2px solid #ff0099",
-                    boxShadow: "0 4px 16px #ff0099",
-                    transition: "all 0.3s ease"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
-                    e.currentTarget.style.transform = "scale(1.025)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
-                    e.currentTarget.style.transform = "scale(1)"
-                  }}
-                  >
-                    <b>
-                      <h3 className="center font">AI Expense Tracker</h3>
-                    </b>
-                    <p>
-                      Developed a full-stack expense tracking app with a Python backend and React frontend, featuring
-                      AI-powered categorization for 80% improved accuracy. Optimized backend with FastAPI and JWT,
-                      boosting performance by 30%.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </motion.div>
+            </section>
+
+            {/* PROJECTS SECTION - achievement panels */}
+            <section id="projects-section" className="rd rd-section">
+              <SectionTitle title="Projects" subtitle="// achievements unlocked" />
+              <div className="rd-grid">
+                {PROJECTS.map((proj) => (
+                  <motion.div
+                    key={proj.name}
+                    className={`panel panel-${proj.accent}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="panel-head">
+                      <h3 className="panel-title">{proj.name}</h3>
+                      <span className="panel-date">{proj.date}</span>
+                    </div>
+                    <ul>
+                      {proj.points.map((p, i) => <li key={i}>{p}</li>)}
+                    </ul>
+                    <Chips items={proj.tech} accent={proj.accent} />
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* SKILLS SECTION - XP / stat bars */}
+            <section id="skills-section" className="rd rd-section">
+              <SectionTitle title="Skills" subtitle="// character stats" />
+              <div className="rd-grid">
+                {SKILLS.map((cat) => (
+                  <motion.div
+                    key={cat.name}
+                    className={`panel panel-${cat.accent}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <SkillBar {...cat} />
+                  </motion.div>
+                ))}
+              </div>
             </section>
 
             {/* ACTIVITIES & LEADERSHIP SECTION */}
@@ -725,57 +787,34 @@ function Portfolio() {
             </section>
 
             {/* CONTACT SECTION */}
-            <div style={{ padding: "4rem 0" }}>
+            <section id="contact-section" className="rd rd-section">
+              <SectionTitle title="Contact" subtitle="// press start to connect" />
               <motion.div
+                className="rd-grid"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
               >
-                <h2 className="center font" style={{ color: "gold", textShadow: " 0 0 20px gold", fontSize: "2.5rem", marginBottom: "3rem" }}>
-                  Reach Me On 
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 center">
-                <div className="card" style={{
-                    border: "2px solid #ff0099",
-                    boxShadow: "0 4px 16px #ff0099",
-                    transition: "all 0.3s ease"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 18px 2px #ff0099"
-                    e.currentTarget.style.transform = "scale(1.025)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 4px 16px #ff0099"
-                    e.currentTarget.style.transform = "scale(1)"
-                  }}
-                  >
-                    <p>
-                      <h3 className="font">US Number:</h3>
-                      +1 (717) 648 7215
-                    </p>
-                  </div>
-                  <div className="card" style={{
-                    border: "2px solid #00ffe7",
-                    boxShadow: "0 4px 16px  #00ffe7",
-                    transition: "all 0.3s ease"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = "0 0 18px 2px  #00ffe7"
-                    e.currentTarget.style.transform = "scale(1.025)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = "0 4px 16px  #00ffe7"
-                    e.currentTarget.style.transform = "scale(1)"
-                  }}
-                  >
-                    <p>
-                      <h3 className="font"> Dubai Number:</h3>
-                      +971 50 581 6195
-                    </p>
-                  </div>
+                <a className="panel panel-cyan" href="mailto:rayyan2235@gmail.com" style={{ textDecoration: "none" }}>
+                  <h3 className="panel-title">Email</h3>
+                  <p style={{ color: "#d4d7e6", margin: "0.4rem 0 0" }}>rayyan2235@gmail.com</p>
+                </a>
+                <a className="panel panel-pink" href="https://www.linkedin.com/in/rayyan-syed-5a846725a/" target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                  <h3 className="panel-title">LinkedIn</h3>
+                  <p style={{ color: "#d4d7e6", margin: "0.4rem 0 0" }}>in/RayyanSyed</p>
+                </a>
+                <a className="panel panel-gold" href="https://github.com/rayyan2235" target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+                  <h3 className="panel-title">GitHub</h3>
+                  <p style={{ color: "#d4d7e6", margin: "0.4rem 0 0" }}>github.com/Rayyan2235</p>
+                </a>
+                <div className="panel panel-green">
+                  <h3 className="panel-title">Phone</h3>
+                  <p style={{ color: "#d4d7e6", margin: "0.4rem 0 0" }}>US &middot; +1 (717) 648 7215</p>
+                  <p style={{ color: "#d4d7e6", margin: "0.2rem 0 0" }}>UAE &middot; +971 50 581 6195</p>
                 </div>
               </motion.div>
-            </div>
+            </section>
 
           </div>
         </div>
