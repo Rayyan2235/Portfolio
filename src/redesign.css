@@ -9,7 +9,8 @@
   --neon-gold: #ffd447;
   --neon-green: #32cd32;
   --panel-bg: rgba(12, 12, 22, 0.72);
-  --body-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Unified on the arcade/gaming font across the whole site */
+  --body-font: "Press Start 2P", monospace;
   --arcade-font: "Press Start 2P", monospace;
 }
 
@@ -18,8 +19,9 @@
 .rd li,
 .rd span.body {
   font-family: var(--body-font);
+  font-size: 0.72rem;
   letter-spacing: 0.2px;
-  line-height: 1.6;
+  line-height: 2;
 }
 
 /* ---------- Section titles ---------- */
@@ -47,7 +49,7 @@
 .rd-subtitle {
   font-family: var(--body-font);
   color: #9aa0b5;
-  font-size: 0.95rem;
+  font-size: 0.6rem;
   margin: 0 0 2.2rem;
   letter-spacing: 0.5px;
 }
@@ -123,7 +125,8 @@
 }
 .panel-sub {
   font-family: var(--body-font);
-  font-size: 0.82rem;
+  font-size: 0.6rem;
+  line-height: 1.8;
   color: #c7cbe0;
   font-weight: 600;
 }
@@ -134,7 +137,7 @@
   white-space: nowrap;
 }
 .panel ul { margin: 0.6rem 0 0; padding-left: 1.1rem; }
-.panel li { color: #d4d7e6; font-size: 0.88rem; margin-bottom: 0.35rem; }
+.panel li { color: #d4d7e6; font-size: 0.72rem; line-height: 2; margin-bottom: 0.6rem; }
 .panel li::marker { color: var(--accent, var(--neon-cyan)); }
 
 /* highlight numbers/metrics inside bullets */

@@ -515,14 +515,15 @@ function Portfolio() {
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{
-                  fontSize: "1.5rem",
+                  fontSize: "0.95rem",
                   color: "#ccc",
                   marginBottom: "1rem",
-                  fontFamily: "Inter, system-ui, sans-serif"
+                  lineHeight: 1.9,
+                  fontFamily: "'Press Start 2P', monospace"
                 }}>
                   Software Engineer building full-stack apps &amp; applied AI/ML.
                 </p>
-                <p style={{ fontSize: "0.95rem", color: "#9aa0b5", marginBottom: "2rem", fontFamily: "Inter, system-ui, sans-serif" }}>
+                <p style={{ fontSize: "0.6rem", color: "#9aa0b5", marginBottom: "2rem", lineHeight: 1.9, fontFamily: "'Press Start 2P', monospace" }}>
                   B.S. Computer Science (Engineering) @ Penn State &middot; Class of 2027
                 </p>
                 <a
@@ -557,7 +558,7 @@ function Portfolio() {
             <section id="about-section" className="rd rd-section">
               <SectionTitle title="About Me" subtitle="// player profile" />
               <div className="panel panel-cyan" style={{ maxWidth: "780px" }}>
-                <p style={{ color: "#d4d7e6", fontSize: "1rem", margin: 0 }}>
+                <p style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2, margin: 0 }}>
                   I'm a Computer Science (Engineering) student at Penn State and a software
                   engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
                   <b style={{ color: "#fff" }}> applied AI/ML</b>. I've shipped production features
