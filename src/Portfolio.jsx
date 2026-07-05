@@ -515,7 +515,7 @@ function Portfolio() {
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{
-                  fontSize: "0.95rem",
+                  fontSize: "1.15rem",
                   color: "#ccc",
                   marginBottom: "1rem",
                   lineHeight: 1.9,
@@ -523,7 +523,7 @@ function Portfolio() {
                 }}>
                   Software Engineer building full-stack apps &amp; applied AI/ML.
                 </p>
-                <p style={{ fontSize: "0.6rem", color: "#9aa0b5", marginBottom: "2rem", lineHeight: 1.9, fontFamily: "'Press Start 2P', monospace" }}>
+                <p style={{ fontSize: "0.8rem", color: "#9aa0b5", marginBottom: "2rem", lineHeight: 1.9, fontFamily: "'Press Start 2P', monospace" }}>
                   B.S. Computer Science (Engineering) @ Penn State &middot; Class of 2027
                 </p>
                 <a
@@ -537,7 +537,7 @@ function Portfolio() {
               </div>
 
               {/* Right side - Profile image */}
-              <div style={{ flex: "1", display: "flex", justifyContent: "center" }}>
+              <div style={{ flex: "1", display: "flex", justifyContent: "flex-end" }}>
                 <TiltedCard
                   imageSrc={profilePics}
                   altText={false}
