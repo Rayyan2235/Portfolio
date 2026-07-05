@@ -557,7 +557,7 @@ function Portfolio() {
             {/* ABOUT ME SECTION */}
             <section id="about-section" className="rd rd-section">
               <SectionTitle title="About Me" subtitle="// player profile" />
-              <div className="panel panel-cyan" style={{ maxWidth: "780px" }}>
+              <div className="panel panel-cyan" style={{ maxWidth: "780px", margin: "0 auto" }}>
                 <p style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2, margin: 0 }}>
                   I'm a Computer Science (Engineering) student at Penn State and a software
                   engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
