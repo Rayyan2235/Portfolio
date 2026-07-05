@@ -21,7 +21,7 @@ const EXPERIENCE = [
     role: "Applied AI Engineering",
     location: "Remote",
     date: "May 2026 – Present",
-    rank: "S-RANK",
+    //rank: "S-RANK",
     accent: "gold",
     points: [
       "Navigated enterprise codebases with AI-assisted tools, cutting issue reproduction time by 60% via structured debugging.",
@@ -34,7 +34,7 @@ const EXPERIENCE = [
     role: "Applied Data Science Engineer",
     location: "University Park, PA",
     date: "Dec 2025 – Present",
-    rank: "A-RANK",
+    //rank: "A-RANK",
     accent: "cyan",
     points: [
       "Built a Grafana analytics dashboard over 10+ sensor streams (speed, RPM, temps), cutting post-session analysis from 30 min to under 5.",
@@ -47,7 +47,7 @@ const EXPERIENCE = [
     role: "Software Engineer Intern",
     location: "Jeddah, Saudi Arabia",
     date: "May 2025 – May 2026",
-    rank: "A-RANK",
+    //rank: "A-RANK",
     accent: "pink",
     points: [
       "Built an AI-powered English tutor for Arabic speakers (React, AWS Lambda, Python NLP) with under 400ms real-time latency.",
@@ -60,7 +60,7 @@ const EXPERIENCE = [
     role: "Web Developer",
     location: "University Park, PA",
     date: "Jun 2025 – Dec 2025",
-    rank: "B-RANK",
+    //rank: "B-RANK",
     accent: "green",
     points: [
       "Built interactive portals for Penn State student clubs (React, TailwindCSS, Firebase), increasing event participation by 40%.",
@@ -72,7 +72,7 @@ const EXPERIENCE = [
     role: "Software Engineer Intern",
     location: "Remote",
     date: "Nov 2024 – Feb 2025",
-    rank: "B-RANK",
+    //rank: "B-RANK",
     accent: "cyan",
     points: [
       "Formulated an AI-driven itinerary generator that cut trip-planning time by 30% through real-time data processing.",
@@ -528,11 +528,11 @@ function Portfolio() {
                 </p>
                 <a
                   className="rd-btn"
-                  href="https://github.com/rayyan2235"
+                  href="https://www.linkedin.com/in/rayyan-syed-5a846725a/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  &gt; VIEW GITHUB
+                  &gt; VIEW LINKEDIN
                 </a>
               </div>
 
