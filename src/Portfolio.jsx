@@ -10,7 +10,15 @@ import profilePics from "./assets/candid.png"
 import "./background.css"
 import "./redesign.css"
 import TiltedCard from "../Reactbits/TiltedCard/TiltedCard";
+import DecryptedText from "../Reactbits/DecryptedText/DecryptedText";
+import LogoLoop from "../Reactbits/LogoLoop/LogoLoop";
 import Starfield from "./Starfield" // Starry background with shooting stars
+import {
+  SiReact, SiPython, SiJavascript, SiC, SiHtml5, SiCss3, SiNodedotjs,
+  SiFastapi, SiSpringboot, SiTailwindcss, SiFlask, SiPytorch, SiScikitlearn,
+  SiHuggingface, SiOpenai, SiOllama, SiPandas, SiNumpy, SiDocker,
+  SiGithubactions, SiLinux, SiPostgresql,
+} from "react-icons/si"
 
 /* ============================================================
    RESUME DATA — single source of truth (edit here to update)
@@ -86,6 +94,8 @@ const PROJECTS = [
     name: "Fantasy Premier League Match Predictor",
     accent: "pink",
     date: "Aug 2025 – Present",
+    blurb: "ML system that predicts English Premier League match outcomes.",
+    repo: "https://github.com/rayyan2235",
     points: [
       "Engineering an EPL match-prediction system with rolling averages and historical metrics, improving baseline accuracy by 15%.",
       "Built a full-stack app (FastAPI, React, PostgreSQL) with dynamic dashboards and cross-validation to reduce model variance.",
@@ -96,6 +106,8 @@ const PROJECTS = [
     name: "EmpathAI",
     accent: "cyan",
     date: "May 2025 – Aug 2025",
+    blurb: "Full-stack, voice-based AI therapist with real-time emotion detection.",
+    repo: "https://github.com/rayyan2235",
     points: [
       "Built a full-stack AI Therapist (FastAPI, React, LLaMA 3 via Ollama) enabling secure real-time voice therapy at sub-400ms latency with 95% crisis-detection accuracy.",
       "Engineered emotion & sentiment monitoring with Hugging Face and low-latency bidirectional audio via LiveKit.",
@@ -104,11 +116,30 @@ const PROJECTS = [
   },
 ]
 
-const SKILLS = [
-  { name: "Languages", level: 90, accent: "cyan", items: ["Python", "Java", "JavaScript", "SQL", "C", "Verilog", "HTML/CSS"] },
-  { name: "Frameworks", level: 85, accent: "pink", items: ["React", "Node.js", "FastAPI", "Spring Boot", "Tailwind", "Flask", "PyTorch"] },
-  { name: "ML / Data", level: 80, accent: "gold", items: ["Scikit-Learn", "Hugging Face", "OpenAI", "Ollama", "Pandas", "NumPy", "Matplotlib"] },
-  { name: "Cloud & DevOps", level: 75, accent: "green", items: ["AWS (Lambda, S3)", "LiveKit", "Docker", "GitHub Actions", "Unix/Linux"] },
+/* Tech logos for the Skills logo-loop marquee (icons that have brand marks) */
+const TECH_LOGOS = [
+  { node: <SiPython />, title: "Python" },
+  { node: <SiJavascript />, title: "JavaScript" },
+  { node: <SiReact />, title: "React" },
+  { node: <SiNodedotjs />, title: "Node.js" },
+  { node: <SiFastapi />, title: "FastAPI" },
+  { node: <SiFlask />, title: "Flask" },
+  { node: <SiSpringboot />, title: "Spring Boot" },
+  { node: <SiPytorch />, title: "PyTorch" },
+  { node: <SiScikitlearn />, title: "scikit-learn" },
+  { node: <SiHuggingface />, title: "Hugging Face" },
+  { node: <SiOpenai />, title: "OpenAI" },
+  { node: <SiOllama />, title: "Ollama" },
+  { node: <SiPandas />, title: "pandas" },
+  { node: <SiNumpy />, title: "NumPy" },
+  { node: <SiPostgresql />, title: "PostgreSQL" },
+  { node: <SiDocker />, title: "Docker" },
+  { node: <SiGithubactions />, title: "GitHub Actions" },
+  { node: <SiLinux />, title: "Linux" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS" },
+  { node: <SiC />, title: "C" },
+  { node: <SiHtml5 />, title: "HTML5" },
+  { node: <SiCss3 />, title: "CSS3" },
 ]
 
 /* Reusable section title */
@@ -132,29 +163,20 @@ function Chips({ items, accent }) {
   )
 }
 
-/* Animated XP / stat bar (fills when scrolled into view) */
-function SkillBar({ name, level, accent, items }) {
+/* Reveal-on-scroll wrapper — mirrors the Activities section's entrance
+   (fade + rise, re-triggers each time it scrolls into view) */
+function Reveal({ children, className, style, delay = 0 }) {
   return (
-    <div className={`skill-block panel-${accent}`}>
-      <div className="skill-row">
-        <span className="skill-name">{name}</span>
-        <span className="skill-lvl">LV {level}</span>
-      </div>
-      <div className="xp-track">
-        <motion.div
-          className="xp-fill"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
-        />
-      </div>
-      <div className="chips" style={{ marginTop: "0.6rem" }}>
-        {items.map((t) => (
-          <span key={t} className="chip">{t}</span>
-        ))}
-      </div>
-    </div>
+    <motion.div
+      className={className}
+      style={style}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut", delay }}
+    >
+      {children}
+    </motion.div>
   )
 }
 
@@ -557,16 +579,18 @@ function Portfolio() {
             {/* ABOUT ME SECTION */}
             <section id="about-section" className="rd rd-section">
               <SectionTitle title="About Me" subtitle="// player profile" />
-              <div className="panel panel-cyan" style={{ maxWidth: "780px", margin: "0 auto" }}>
-                <p style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2, margin: 0 }}>
-                  I&apos;m a Computer Science (Engineering) student at Penn State and a software
-                  engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
-                  <b style={{ color: "#fff" }}> applied AI/ML</b>. I&apos;ve shipped production features
-                  across startups and open source &mdash; from real-time voice AI and NLP pipelines
-                  to data dashboards and full-stack web apps. I care about clean code, low latency,
-                  and shipping things people actually use.
-                </p>
-              </div>
+              <Reveal className="panel panel-cyan" style={{ maxWidth: "780px", margin: "0 auto" }}>
+                <div style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2 }}>
+                  <DecryptedText
+                    text="I'm a Computer Science (Engineering) student at Penn State and a software engineer focused on full-stack development and applied AI/ML. I've shipped production features across startups and open source — from real-time voice AI and NLP pipelines to data dashboards and full-stack web apps. I care about clean code, low latency, and shipping things people actually use."
+                    animateOn="view"
+                    speed={45}
+                    maxIterations={14}
+                    className="about-decrypt"
+                    encryptedClassName="about-decrypt-enc"
+                  />
+                </div>
+              </Reveal>
             </section>
 
             {/* TYPING EFFECT SECTION */}
@@ -589,7 +613,7 @@ function Portfolio() {
                 className="quest-log"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.7 }}
               >
                 {EXPERIENCE.map((job) => (
@@ -620,13 +644,18 @@ function Portfolio() {
                     className={`panel panel-${proj.accent}`}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ duration: 0.6 }}
                   >
                     <div className="panel-head">
-                      <h3 className="panel-title">{proj.name}</h3>
+                      <h3 className="panel-title">
+                        <a href={proj.repo} target="_blank" rel="noreferrer" className="panel-link">
+                          {proj.name} ↗
+                        </a>
+                      </h3>
                       <span className="panel-date">{proj.date}</span>
                     </div>
+                    <p className="panel-blurb">{proj.blurb}</p>
                     <ul>
                       {proj.points.map((p, i) => <li key={i}>{p}</li>)}
                     </ul>
@@ -636,23 +665,23 @@ function Portfolio() {
               </div>
             </section>
 
-            {/* SKILLS SECTION - XP / stat bars */}
+            {/* SKILLS SECTION - tech logo loop */}
             <section id="skills-section" className="rd rd-section">
               <SectionTitle title="Skills" subtitle="// character stats" />
-              <div className="rd-grid">
-                {SKILLS.map((cat) => (
-                  <motion.div
-                    key={cat.name}
-                    className={`panel panel-${cat.accent}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <SkillBar {...cat} />
-                  </motion.div>
-                ))}
-              </div>
+              <Reveal style={{ color: "#e6f7ff" }}>
+                <LogoLoop
+                  logos={TECH_LOGOS}
+                  speed={90}
+                  direction="left"
+                  logoHeight={40}
+                  gap={44}
+                  pauseOnHover
+                  scaleOnHover
+                  fadeOut
+                  fadeOutColor="#15121f"
+                  ariaLabel="Technologies I work with"
+                />
+              </Reveal>
             </section>
 
             {/* ACTIVITIES & LEADERSHIP SECTION */}
@@ -794,7 +823,7 @@ function Portfolio() {
                 className="rd-grid"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.7 }}
               >
                 <a className="panel panel-cyan" href="mailto:rayyan2235@gmail.com" style={{ textDecoration: "none" }}>

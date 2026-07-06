@@ -143,6 +143,38 @@
 /* highlight numbers/metrics inside bullets */
 .panel li b, .panel li strong { color: #fff; }
 
+/* Project one-line blurb + repo link */
+.panel-blurb {
+  font-family: var(--body-font);
+  font-size: 0.62rem;
+  line-height: 1.8;
+  color: #9aa0b5;
+  margin: 0.4rem 0 0.2rem;
+}
+.panel-link {
+  color: inherit;
+  text-decoration: none;
+  transition: text-shadow 0.2s ease;
+}
+.panel-link:hover { text-shadow: 0 0 10px var(--accent, var(--neon-cyan)); }
+
+/* About Me — DecryptedText: revealed vs scrambling glyphs */
+.about-decrypt { color: #d4d7e6; }
+.about-decrypt-enc { color: var(--neon-cyan); opacity: 0.75; }
+
+/* Skills — size (node icons aren't sized by logoHeight), brighten + glow */
+#skills-section .logoloop__node,
+#skills-section .logoloop__node svg { color: #d8f4ff; }
+#skills-section .logoloop__node svg {
+  height: var(--logoloop-logoHeight, 40px);
+  width: auto;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 231, 0.35));
+  transition: filter 0.2s ease;
+}
+#skills-section .logoloop__item:hover .logoloop__node svg {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 231, 0.6));
+}
+
 /* ---------- Tech chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
 .chip {
