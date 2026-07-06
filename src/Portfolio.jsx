@@ -21,7 +21,7 @@ const EXPERIENCE = [
     role: "Applied AI Engineering",
     location: "Remote",
     date: "May 2026 – Present",
-    rank: "S-RANK",
+    //rank: "S-RANK",
     accent: "gold",
     points: [
       "Navigated enterprise codebases with AI-assisted tools, cutting issue reproduction time by 60% via structured debugging.",
@@ -34,7 +34,7 @@ const EXPERIENCE = [
     role: "Applied Data Science Engineer",
     location: "University Park, PA",
     date: "Dec 2025 – Present",
-    rank: "A-RANK",
+    //rank: "A-RANK",
     accent: "cyan",
     points: [
       "Built a Grafana analytics dashboard over 10+ sensor streams (speed, RPM, temps), cutting post-session analysis from 30 min to under 5.",
@@ -47,7 +47,7 @@ const EXPERIENCE = [
     role: "Software Engineer Intern",
     location: "Jeddah, Saudi Arabia",
     date: "May 2025 – May 2026",
-    rank: "A-RANK",
+    //rank: "A-RANK",
     accent: "pink",
     points: [
       "Built an AI-powered English tutor for Arabic speakers (React, AWS Lambda, Python NLP) with under 400ms real-time latency.",
@@ -60,7 +60,7 @@ const EXPERIENCE = [
     role: "Web Developer",
     location: "University Park, PA",
     date: "Jun 2025 – Dec 2025",
-    rank: "B-RANK",
+    //rank: "B-RANK",
     accent: "green",
     points: [
       "Built interactive portals for Penn State student clubs (React, TailwindCSS, Firebase), increasing event participation by 40%.",
@@ -72,7 +72,7 @@ const EXPERIENCE = [
     role: "Software Engineer Intern",
     location: "Remote",
     date: "Nov 2024 – Feb 2025",
-    rank: "B-RANK",
+    //rank: "B-RANK",
     accent: "cyan",
     points: [
       "Formulated an AI-driven itinerary generator that cut trip-planning time by 30% through real-time data processing.",
@@ -515,28 +515,29 @@ function Portfolio() {
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{
-                  fontSize: "1.5rem",
+                  fontSize: "1.15rem",
                   color: "#ccc",
                   marginBottom: "1rem",
-                  fontFamily: "Inter, system-ui, sans-serif"
+                  lineHeight: 1.9,
+                  fontFamily: "'Press Start 2P', monospace"
                 }}>
                   Software Engineer building full-stack apps &amp; applied AI/ML.
                 </p>
-                <p style={{ fontSize: "0.95rem", color: "#9aa0b5", marginBottom: "2rem", fontFamily: "Inter, system-ui, sans-serif" }}>
+                <p style={{ fontSize: "0.8rem", color: "#9aa0b5", marginBottom: "2rem", lineHeight: 1.9, fontFamily: "'Press Start 2P', monospace" }}>
                   B.S. Computer Science (Engineering) @ Penn State &middot; Class of 2027
                 </p>
                 <a
                   className="rd-btn"
-                  href="https://github.com/rayyan2235"
+                  href="https://www.linkedin.com/in/rayyan-syed-5a846725a/"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  &gt; VIEW GITHUB
+                  &gt; VIEW LINKEDIN
                 </a>
               </div>
 
               {/* Right side - Profile image */}
-              <div style={{ flex: "1", display: "flex", justifyContent: "center" }}>
+              <div style={{ flex: "1", display: "flex", justifyContent: "flex-end" }}>
                 <TiltedCard
                   imageSrc={profilePics}
                   altText={false}
@@ -556,8 +557,8 @@ function Portfolio() {
             {/* ABOUT ME SECTION */}
             <section id="about-section" className="rd rd-section">
               <SectionTitle title="About Me" subtitle="// player profile" />
-              <div className="panel panel-cyan" style={{ maxWidth: "780px" }}>
-                <p style={{ color: "#d4d7e6", fontSize: "1rem", margin: 0 }}>
+              <div className="panel panel-cyan" style={{ maxWidth: "780px", margin: "0 auto" }}>
+                <p style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2, margin: 0 }}>
                   I'm a Computer Science (Engineering) student at Penn State and a software
                   engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
                   <b style={{ color: "#fff" }}> applied AI/ML</b>. I've shipped production features
