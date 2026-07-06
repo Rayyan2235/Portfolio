@@ -1,5 +1,4 @@
 import Portfolio from "./Portfolio";
-import {motion} from "framer-motion";
 
 function App() {
     return (

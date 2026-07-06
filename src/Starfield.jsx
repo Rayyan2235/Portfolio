@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 // Starfield: renders static twinkling stars and shooting stars
 function Starfield() {
@@ -74,7 +74,7 @@ function Starfield() {
     }
     function animate() {
       ctx.clearRect(0, 0, width, height)
-      shootingStars.forEach((star, i) => {
+      shootingStars.forEach((star) => {
         // Draw shooting star as a fading line
         ctx.save()
         ctx.globalAlpha = 1 - star.life / star.maxLife

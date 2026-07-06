@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { FaGithub, FaLess, FaLinkedin, FaGamepad } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaGamepad } from "react-icons/fa"
 import { HiOutlineMail } from "react-icons/hi"
-import { MdSports, MdSportsSoccer } from "react-icons/md"
+import { MdSportsSoccer } from "react-icons/md"
 import { Typewriter } from "react-simple-typewriter"
 import profilePics from "./assets/candid.png"
 import "./background.css"
@@ -511,7 +511,7 @@ function Portfolio() {
                   marginBottom: "1rem"
 
                 }}>
-                  Hi There, I'm{" "}
+                  Hi There, I&apos;m{" "}
                   <span style={{ color: "#ff6b35" }}>Rayyan Syed</span>
                 </h1>
                 <p style={{
@@ -559,9 +559,9 @@ function Portfolio() {
               <SectionTitle title="About Me" subtitle="// player profile" />
               <div className="panel panel-cyan" style={{ maxWidth: "780px", margin: "0 auto" }}>
                 <p style={{ color: "#d4d7e6", fontSize: "0.72rem", lineHeight: 2, margin: 0 }}>
-                  I'm a Computer Science (Engineering) student at Penn State and a software
+                  I&apos;m a Computer Science (Engineering) student at Penn State and a software
                   engineer focused on <b style={{ color: "#fff" }}>full-stack development</b> and
-                  <b style={{ color: "#fff" }}> applied AI/ML</b>. I've shipped production features
+                  <b style={{ color: "#fff" }}> applied AI/ML</b>. I&apos;ve shipped production features
                   across startups and open source &mdash; from real-time voice AI and NLP pipelines
                   to data dashboards and full-stack web apps. I care about clean code, low latency,
                   and shipping things people actually use.
@@ -750,7 +750,7 @@ function Portfolio() {
                     </h3>
                     <p style={{ color: "#fff" }}>
                       Die-hard Manchester United supporter! Nothing beats the thrill of watching the Red Devils play. 
-                      Whether it's celebrating victories at Old Trafford or analyzing transfer news, football is my passion outside of coding.
+                      Whether it&apos;s celebrating victories at Old Trafford or analyzing transfer news, football is my passion outside of coding.
                     </p>
                   </div>
                   
@@ -780,7 +780,7 @@ function Portfolio() {
                       Gaming Enthusiast
                     </h3>
                     <p style={{ color: "#fff" }}>
-                      When I'm not coding, you'll find me immersed in games like CS2, Valorant and Fortnite. Gaming helps me unwind and often inspires creative solutions for my projects.
+                      When I&apos;m not coding, you&apos;ll find me immersed in games like CS2, Valorant and Fortnite. Gaming helps me unwind and often inspires creative solutions for my projects.
                     </p>
                   </div>
                 </div>
