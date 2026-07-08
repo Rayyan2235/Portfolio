@@ -172,10 +172,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logoloop__track {
-    transform: translate3d(0, 0, 0) !important;
-  }
-
+  /* NOTE: intentionally do NOT pin .logoloop__track transform here.
+     The marquee scroll is a core part of the design and must keep looping
+     even when the OS has "reduce animations" enabled. Pinning it with
+     !important would override the JS-driven inline transform and freeze
+     the loop. We still drop the hover micro-transitions below. */
   .logoloop__item img,
   .logoloop__node {
     transition: none !important;

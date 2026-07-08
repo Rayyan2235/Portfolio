@@ -279,27 +279,47 @@ function Portfolio() {
   const [navVisible, setNavVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
-  // SCROLL DETECTION - This controls when navbar shows/hides
+  // SCROLL DETECTION - This controls when navbar shows/hides.
+  // NOTE: `html, body` use `overflow-x: hidden` + `height: 100%`, which makes
+  // the BODY the scroll container (not the window), so window.scrollY stays 0.
+  // We read from whichever element actually scrolls, and listen in the capture
+  // phase so a body-internal scroll (which doesn't bubble) still reaches us.
   useEffect(() => {
+    const readScrollY = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY // Get current scroll position
-      
+      const currentScrollY = readScrollY() // Get current scroll position
+
       // Hide navbar when scrolling down and past 100px, show when scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setNavVisible(false) // User is scrolling DOWN - hide navbar
       } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
         setNavVisible(true) // User is scrolling UP or near top - show navbar
       }
-      
+
       setLastScrollY(currentScrollY) // Remember this scroll position for next time
     }
-    
-    // Add the scroll listener to the window
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    
+
+    // Capture phase + passive: catches the body's scroll even though it doesn't bubble.
+    window.addEventListener("scroll", handleScroll, { passive: true, capture: true })
+
     // Cleanup function - removes the listener when component unmounts
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll, { capture: true })
   }, [lastScrollY]) // Re-run this effect when lastScrollY changes
+
+  // HOVER-AT-TOP - reveal the navbar whenever the cursor nears the top edge,
+  // even if the user had scrolled down and hidden it.
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (e.clientY <= 80) setNavVisible(true)
+    }
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
 
   // SMOOTH SCROLL FUNCTION - This handles clicking on navbar buttons
   const scrollToSection = (sectionId) => {
@@ -584,8 +604,10 @@ function Portfolio() {
                   <DecryptedText
                     text="I'm a Computer Science (Engineering) student at Penn State and a software engineer focused on full-stack development and applied AI/ML. I've shipped production features across startups and open source — from real-time voice AI and NLP pipelines to data dashboards and full-stack web apps. I care about clean code, low latency, and shipping things people actually use."
                     animateOn="view"
-                    speed={45}
-                    maxIterations={14}
+                    sequential
+                    revealDirection="start"
+                    speed={16}
+                    useOriginalCharsOnly={false}
                     className="about-decrypt"
                     encryptedClassName="about-decrypt-enc"
                   />
@@ -671,15 +693,19 @@ function Portfolio() {
               <Reveal style={{ color: "#e6f7ff" }}>
                 <LogoLoop
                   logos={TECH_LOGOS}
-                  speed={90}
+                  speed={45}
                   direction="left"
                   logoHeight={40}
-                  gap={44}
+                  gap={56}
                   pauseOnHover
                   scaleOnHover
-                  fadeOut
-                  fadeOutColor="#15121f"
                   ariaLabel="Technologies I work with"
+                  renderItem={(item) => (
+                    <div className="skill-logo">
+                      <span className="logoloop__node">{item.node}</span>
+                      <span className="skill-logo__label">{item.title}</span>
+                    </div>
+                  )}
                 />
               </Reveal>
             </section>
@@ -845,6 +871,13 @@ function Portfolio() {
                 </div>
               </motion.div>
             </section>
+
+            {/* FOOTER - copyright */}
+            <footer className="rd-footer">
+              <span className="rd-footer__copy">
+                &copy; {new Date().getFullYear()} Rayyan Syed. All rights reserved.
+              </span>
+            </footer>
 
           </div>
         </div>

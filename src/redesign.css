@@ -24,6 +24,21 @@
   line-height: 2;
 }
 
+/* ---------- Footer / copyright ---------- */
+.rd-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.rd-footer__copy {
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: #9aa3c2;
+}
+
 /* ---------- Section titles ---------- */
 .rd-section {
   max-width: 1200px;
@@ -173,6 +188,32 @@
 }
 #skills-section .logoloop__item:hover .logoloop__node svg {
   filter: drop-shadow(0 0 10px rgba(0, 255, 231, 0.6));
+}
+/* Icon stacked over its name label */
+#skills-section .skill-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+#skills-section .skill-logo__label {
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: #b9c2e0;
+  white-space: nowrap;
+  line-height: 1;
+}
+/* scaleOnHover targets the img/node; scale the whole stack instead */
+#skills-section .logoloop--scale-hover .logoloop__item:hover .skill-logo {
+  transform: scale(1.15);
+  transform-origin: center center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#skills-section .logoloop__item:hover .skill-logo__label { color: #eaf2ff; }
+/* Avoid compounding with the vendored node-level scale — scale the stack only */
+#skills-section .logoloop--scale-hover .logoloop__item:hover .logoloop__node {
+  transform: none;
 }
 
 /* ---------- Tech chips ---------- */
