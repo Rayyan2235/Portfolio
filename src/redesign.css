@@ -335,6 +335,92 @@
   text-shadow: none;
 }
 
-@media (max-width: 640px) {
-  .rd-section { padding: 3rem 1rem; }
+/* Hamburger is desktop-hidden; the mobile block below reveals it. */
+.nav-toggle { display: none; }
+
+/* =========================================================
+   MOBILE STYLES  (max-width: 768px)
+   Scoped entirely to small screens — desktop is untouched.
+   Uses !important where it must override component inline styles.
+   ========================================================= */
+@media (max-width: 768px) {
+  /* ---- Navbar → hamburger ---- */
+  .site-nav {
+    padding: 0.7rem 1rem !important;
+    flex-wrap: nowrap !important;
+  }
+  .nav-logo { font-size: 1.35rem !important; }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid #00ffe7;
+    color: #00ffe7;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 255, 231, 0.4);
+  }
+
+  /* Nav links collapse into a dropdown panel below the bar */
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.55rem !important;
+    padding: 0.85rem 1rem 1.1rem;
+    background: rgba(0, 0, 0, 0.97);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  }
+  .nav-links.open { display: flex !important; }
+  .nav-links button {
+    width: 100%;
+    font-size: 1rem !important;
+    padding: 0.85rem 1rem !important;
+  }
+
+  /* Social icons live in the Contact section already — hide the nav copy */
+  .nav-social { display: none !important; }
+
+  /* ---- Hero: stack vertically, shrink type ---- */
+  .hero {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    min-height: auto !important;
+    padding-top: 1rem !important;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero-text {
+    padding-right: 0 !important;
+    height: auto !important;
+    order: 2;
+  }
+  .hero-media {
+    justify-content: center !important;
+    order: 1;
+  }
+  .hero-text h1 { font-size: 2.1rem !important; }
+  .hero-text p { font-size: 0.78rem !important; line-height: 1.8 !important; }
+  .hero-text .rd-btn { font-size: 0.62rem; }
+
+  /* ---- Sections & grids ---- */
+  .rd-section { padding: 2.75rem 1rem !important; }
+  .rd-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+  /* Quest-log timeline: tighter indent */
+  .quest-log { margin-left: 0.25rem; padding-left: 1.1rem; }
+
+  /* Footer breathing room */
+  .rd-footer { padding: 2rem 1rem 2.5rem; }
 }

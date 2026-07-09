@@ -278,6 +278,7 @@ function TypingEffect() {
 function Portfolio() {
   const [navVisible, setNavVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false) // mobile hamburger menu
 
   // SCROLL DETECTION - This controls when navbar shows/hides.
   // NOTE: `html, body` use `overflow-x: hidden` + `height: 100%`, which makes
@@ -371,7 +372,8 @@ function Portfolio() {
         <div className="min-h-screen bg-transparent">
           
           {/* NAVBAR - Fixed navigation bar that hides/shows based on scroll direction */}
-          <nav 
+          <nav
+            className="site-nav"
             style={{
               position: "fixed", // Stays in place when scrolling
               top: 0,
@@ -393,9 +395,10 @@ function Portfolio() {
             }}
           >
             {/* LOGO - Click to scroll to top */}
-            <h1 
-              onClick={() => scrollToSection('hero')} // When clicked, scroll to hero section
-              style={{ 
+            <h1
+              className="nav-logo"
+              onClick={() => { setMenuOpen(false); scrollToSection('hero') }} // scroll to hero
+              style={{
                 color: "#00ffe7", 
                 fontSize: "1.8rem",
                 textShadow: "0 0 10px #00ffe7",
@@ -411,12 +414,14 @@ function Portfolio() {
             </h1>
 
             {/* NAVIGATION MENU - Buttons to scroll to different sections */}
-            <div style={{
-              display: "flex",
-              gap: "1rem",
-              alignItems: "center",
-              flexWrap: "wrap"
-            }}>
+            <div
+              className={`nav-links${menuOpen ? " open" : ""}`}
+              style={{
+                display: "flex",
+                gap: "1rem",
+                alignItems: "center",
+                flexWrap: "wrap"
+              }}>
               {[
                 { label: "About", id: "about-section", color: "#00ffe7" },
                 { label: "Experience", id: "experience-section", color: "#ffd447" },
@@ -426,7 +431,7 @@ function Portfolio() {
               ].map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => { setMenuOpen(false); scrollToSection(item.id) }}
                   style={{
                     background: "transparent",
                     border: `2px solid ${item.color}`,
@@ -456,8 +461,8 @@ function Portfolio() {
             </div>
 
             {/* SOCIAL MEDIA ICONS */}
-            <section style={{ 
-              display: "flex", 
+            <section className="nav-social" style={{
+              display: "flex",
               gap: "1.2rem",
               alignItems: "center"
             }}>
@@ -520,16 +525,27 @@ function Portfolio() {
                 <HiOutlineMail size={28} />
               </a>
             </section>
+
+            {/* HAMBURGER - mobile only (hidden on desktop via CSS) */}
+            <button
+              className="nav-toggle"
+              aria-label="Toggle navigation menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              {menuOpen ? "✕" : "☰"}
+            </button>
           </nav>
 
           {/* MAIN CONTENT - All sections with proper spacing for fixed navbar */}
           <div style={{ paddingTop: "100px" }}>
             
             {/* HERO SECTION - Landing area with intro and profile image */}
-            <div 
+            <div
               id="hero" // ID for navbar logo click
-              style={{ 
-                display: "flex", 
+              className="hero"
+              style={{
+                display: "flex",
                 alignItems: "center", 
                 justifyContent: "space-between",
                 paddingTop: "2rem",
@@ -542,7 +558,7 @@ function Portfolio() {
               }}
             >
               {/* Left side - Intro text */}
-              <div style={{ flex: "1", paddingRight: "2.5rem", height:"2 rem"}}>
+              <div className="hero-text" style={{ flex: "1", paddingRight: "2.5rem", height:"2 rem"}}>
                 <p style={{ fontFamily: "'Press Start 2P', monospace", color: "#00ffe7", fontSize: "0.8rem", marginBottom: "1rem", textShadow: "0 0 8px #00ffe7" }}>
                   PLAYER 1 CONNECTED
                 </p>
@@ -579,7 +595,7 @@ function Portfolio() {
               </div>
 
               {/* Right side - Profile image */}
-              <div style={{ flex: "1", display: "flex", justifyContent: "flex-end" }}>
+              <div className="hero-media" style={{ flex: "1", display: "flex", justifyContent: "flex-end" }}>
                 <TiltedCard
                   imageSrc={profilePics}
                   altText={false}
