@@ -1,0 +1,44 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-13T21:19:44.072Z",
+        "reason": "Claude: hairline-ruled list rows (ol/li) carry padding-block on each li; the rule sits between rows by design, no text is flush against it"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-10-13T21:19:51.594Z",
+        "reason": "Claude: fonts mandated by the user's Daybreak design system, user asked to use it"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "createdAt": "2026-10-13T21:19:51.736Z",
+        "reason": "Claude: fonts mandated by the user's Daybreak design system, user asked to use it"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-10-13T21:19:51.886Z",
+        "reason": "Claude: fonts mandated by the user's Daybreak design system, user asked to use it"
+      },
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-13T21:19:52.023Z",
+        "reason": "Claude: single live-status dot on the local-time chip; Daybreak defines dusk as the live dot, motion is meaningful and reduced-motion disables it"
+      }
+    ]
+  }
+}
