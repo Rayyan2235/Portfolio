@@ -1,0 +1,88 @@
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { usePrefs } from '../prefs.jsx';
+import { SKIES, resolveSky } from '../sky.js';
+import { KINDS } from './Transitions.jsx';
+import { RESUME } from '../data.js';
+import { audioContext } from '../audio.js';
+import { Roll } from './Craft.jsx';
+
+export default function Nav({ onOpenMenu }) {
+  const { motionOn, setMotionOn, sky, setSky, transition, setTransition, sound, setSound } = usePrefs();
+  const [hidden, setHidden] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { scrollY, scrollYProgress } = useScroll();
+  const panelRef = useRef(null), btnRef = useRef(null);
+  const [here, setHere] = useState('');
+
+  // which section is under the middle of the screen, so its link wears the ink underline
+  useEffect(() => {
+    const ids = ['experience', 'work', 'hobbies', 'contact'];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setHere(e.target.id); }), { rootMargin: '-45% 0px -45% 0px' });
+    ids.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+    return () => io.disconnect();
+  }, []);
+
+  useMotionValueEvent(scrollY, 'change', y => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setHidden(y > 300 && y > prev + 4);
+    if (y < prev - 4) setHidden(false);
+  });
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDoc = e => { if (!panelRef.current?.contains(e.target) && !btnRef.current?.contains(e.target)) setOpen(false); };
+    const onKey = e => { if (e.key === 'Escape') { setOpen(false); btnRef.current?.focus(); } };
+    document.addEventListener('pointerdown', onDoc); document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('pointerdown', onDoc); document.removeEventListener('keydown', onKey); };
+  }, [open]);
+
+  const now = resolveSky(sky);
+
+  return (
+    <motion.nav className="nav" aria-label="Main" initial={false}
+      animate={{ y: hidden && !open ? -90 : 0 }} transition={{ type: 'spring', stiffness: 380, damping: 36 }}>
+      <a className="who" href="#top" data-go="top"><span className="who-seal" aria-hidden="true">R</span>Rayyan Syed</a>
+      <a className={`l${here === 'experience' ? ' on' : ''} opt`} href="#experience" data-go="experience"><Roll>Experience</Roll></a>
+      <a className={`l${here === 'work' ? ' on' : ''}`} href="#work" data-go="work"><Roll>Work</Roll></a>
+      <a className={`l${here === 'hobbies' ? ' on' : ''} opt`} href="#hobbies" data-go="hobbies"><Roll>Off the clock</Roll></a>
+      <a className="l" href={RESUME}><Roll>Resume</Roll></a>
+      <a className="cta" href="#contact" data-go="contact">Email</a>
+      <button ref={btnRef} type="button" className="l sky-btn" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen(o => !o)}>
+        <span className={`sky-dot sky-dot-${now}`} aria-hidden="true" />{SKIES[now].label}
+      </button>
+      <button type="button" className="kbtn" onClick={onOpenMenu} aria-haspopup="dialog">Jump <kbd>Ctrl K</kbd></button>
+      {/* how far down the page you are, as a brush stroke along the bottom of the pill */}
+      <motion.span className="nav-ink" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
+
+      <AnimatePresence>
+        {open && (
+          <motion.div ref={panelRef} className="panel" role="group" aria-label="Scene settings"
+            initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}>
+            <fieldset>
+              <legend>Sky</legend>
+              <div className="seg">
+                {['auto', 'dawn', 'day', 'dusk', 'night', 'storm'].map(k => (
+                  <button key={k} type="button" aria-pressed={sky === k} onClick={() => setSky(k)}>{k === 'auto' ? 'Your time' : SKIES[k].label}</button>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Transition</legend>
+              <div className="seg">
+                {['mixed', ...Object.keys(KINDS)].map(k => (
+                  <button key={k} type="button" aria-pressed={transition === k} onClick={() => setTransition(k)}>{k === 'mixed' ? 'Mixed' : KINDS[k].label}</button>
+                ))}
+              </div>
+            </fieldset>
+            <div className="toggles">
+              <button type="button" aria-pressed={motionOn} onClick={() => setMotionOn(!motionOn)}>Motion {motionOn ? 'on' : 'off'}</button>
+              <button type="button" aria-pressed={sound} onClick={() => { if (!sound) audioContext(); setSound(!sound); }}>Storm sound {sound ? 'on' : 'off'}</button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
+  );
+}

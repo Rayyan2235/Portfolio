@@ -1,8 +1,100 @@
-# React + Vite
+<p align="center">
+  <img src="public/art/crane-ink.jpg" alt="Ink painting of a crane in flight, after Kano Chikanobu" width="520">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Rayyan Syed · Portfolio v3</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+  <b>Walk quietly. Leave a mark.</b><br>
+  A portfolio that opens like a hanging scroll, follows your local sky, and lets a Hokusai wave carry you between sections.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  <img alt="React 18" src="https://img.shields.io/badge/React-18-1d3557?logo=react&logoColor=white">
+  <img alt="Vite 6" src="https://img.shields.io/badge/Vite-6-1d3557?logo=vite&logoColor=white">
+  <img alt="Motion" src="https://img.shields.io/badge/Motion-12-1d3557">
+  <img alt="three.js" src="https://img.shields.io/badge/three.js-0.169-1d3557?logo=threedotjs&logoColor=white">
+  <img alt="WebGL" src="https://img.shields.io/badge/WebGL-shader%20hero-e4572e">
+</p>
+
+---
+
+## The idea
+
+Most portfolios list skills. This one tries to feel like somewhere. It is built on **Daybreak**, my own design system, in its dawn theme: warm paper, deep sea indigo, one red sun. The Japanese influence comes from real Edo period art from The Met's public domain collection, brought to life in code.
+
+## What happens when you visit
+
+| Moment | What you see | Where it lives |
+| --- | --- | --- |
+| **Opening** | The first page of the story: Mount Fuji built from real elevation data, rising out of a sea of painted cloud under a comet night in the style of anime skies: dabbed clouds drifting across a dense star field, the Milky Way, shooting stars and a twin ribbon comet. "Welcome" gathers itself out of the stars (the cursor brushes them aside) and scatters back into the sky as you scroll. three.js in its own chunk, resolution adapts to the device. | `FujiOpening.jsx`, `scenes/fuji.js` |
+| **The hero** | A small hanging scroll in the middle of the page. Scroll, and it unrolls into the full hero. | `ScrollExpandHero.jsx` |
+| **The sky** | Hokusai's *Great Wave*, animated in WebGL. The sky follows your clock: dawn, day, dusk or a starry night. Pick **Storm** for rain, lightning and (if you turn it on) thunder. The sun rises as you scroll and the boats bob. | `GreatWaveHero.jsx`, `sky.js` |
+| **Moving around** | Click a section and a transition carries you there: a crashing wave, a storm of sakura petals, falling maple leaves, sumi ink or a lightning flash. | `Transitions.jsx` |
+| **The paper** | A crane glides across the page as you scroll. | `Sections.jsx` |
+| **Work** | An ink painted mountain valley that follows the sky (rain and lightning in a storm, birds by day), with every project in one sideways rail of tilting cards. Each opens a spec sheet. | `Sections.jsx`, `MountainSky.jsx` |
+| **Shortcuts** | `Ctrl K` opens a command menu: jump anywhere, copy my email, change the sky, pick a transition. | `CommandMenu.jsx` |
+| **Snapshots** | Photos from life off the screen as instant prints pegged to a line. Drop images into `src/assets/gallery/` and they appear, captioned from the file name (a number prefix sets the order). | `Gallery.jsx` |
+| **Secrets** | Fifteen hidden things, from easy (tap a red lantern in the story, the Contact sun, the giant name at the bottom) to hard (the Konami code, hire() in the console, a late night visit). The Secrets tab on the right edge counts them and gives a hint for each; finds are kept per browser. | `Secrets.jsx`, `SecretsTab.jsx` | `Secrets.jsx` |
+| **The last view** | Contact sits over an ink landscape painted in code: karst peaks in mist, cedar ridges, a pagoda, matsu pines and a torii in the shallows. It repaints with the sky (dawn, day, dusk, night, storm), and the crane above it flies if you tap it. | `InkLand.jsx` |
+
+Everything respects a **Motion** switch in the nav, works at phone width, and keeps Resume and Email one click away.
+
+## Run it
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the address Vite prints (by default `http://localhost:5190`).
+
+## How it is put together
+
+```
+src/
+  App.jsx                 page order
+  sky.js                  time of day palettes for the hero
+  prefs.jsx               motion, sky, transition and sound settings
+  audio.js                storm sound, synthesized with WebAudio
+  data.js                 projects and experience
+  loop.js                 the shared frame loop every canvas effect runs on
+  components/
+    FujiOpening.jsx       the Fuji opening, first page of the story (scene in scenes/fuji.js)
+    ScrollExpandHero.jsx  hanging scroll that opens into the hero
+    GreatWaveHero.jsx     WebGL Great Wave, sky, rain, lightning, boats
+    Transitions.jsx       the five screen transitions
+    Sections.jsx          statement, work, experience, notes, contact
+    Nav.jsx, CommandMenu.jsx, Ambient.jsx
+public/
+  great-wave.jpg          Hokusai, resized for the web
+  art/                    crane and the story prints, silk lifted to ink on white
+```
+
+A few decisions worth knowing:
+
+* **Real art over drawn art.** The paintings are the actual prints and scrolls. Their aged silk is lifted out ahead of time so only the ink sits on the page.
+* **No scroll hijacking.** The opening uses a sticky section, so trackpads, keyboards and phones all scroll normally.
+* **One frame loop.** Every canvas effect (Fuji, wave, koi, currents, rain) runs through `loopWhileVisible` in `loop.js`: it draws only while on screen, caps the frame rate, and stops asking for frames once scrolled away. A new effect is a draw function plus one call.
+
+## What is next
+
+* A short scroll story about me before the main page, designed for phones first
+* Real screenshots for each project
+
+## Credits
+
+* Katsushika Hokusai, *Under the Wave off Kanagawa*, ca. 1830 to 32. The Met, object 45434, public domain.
+* Kano Chikanobu, *Crane, Tortoise, Pine, and Bamboo under a Rising Sun*. The Met, object 45728, public domain.
+* Story chapters and section backdrops (`public/art/story`), all public domain or CC0 via Wikimedia Commons:
+  * Kawase Hasui, *Evening Snow at Terashima Village* (1920). Public domain in Japan (artist died 1957) and in the US (published before 1931).
+  * Katsushika Hokusai, *Fine Wind, Clear Morning* (Red Fuji); `red-fuji-clear.jpg` is the same print cropped clear of its title cartouche.
+  * Utagawa Hiroshige, *The Whirlpools of Awa* (The Met DP146864), *Fireworks at Ryōgoku* (Musée Guimet EO1841, cropped clear of its cartouches), *Evening Cherry Blossoms at Gotenyama* (The Met DP123249, cropped to the sky and blossoms) *Plum Garden at Kameido* (Rijksmuseum RP-P-1956-743, cropped to the red sky and branches) and *Kinryūzan Temple at Asakusa* (The Met DP122116, CC0, cropped to the snowy court and gate).
+* The opening's look was worked out by taking apart igloo.inc with [rea](https://github.com/morluto/rea): real light, distance haze and film grain rather than glossy materials. Its layout (one subject, the name set big behind it) follows the 3D hero sites on motionsites.ai. The scene is modelled from scratch.
+* Mount Fuji elevation: [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) on AWS Open Data (Mapzen Terrarium format, built from SRTM and other public sources), cut down to `public/terrain/fuji-288.u16`.
+* The print gallery zoom follows exoape.com's project pages as broken down in Olivier Larose's "Zoom Parallax" tutorial; the scroll inked words follow the same idea from Apple's product pages. Both are rewritten here.
+* Fonts: Shippori Mincho B1, Yuji Boku, Zen Kaku Gothic New and Geist Mono, SIL Open Font License 1.1.
+
+---
+
+<p align="center">Built by <a href="https://github.com/Rayyan2235">Rayyan Syed</a> · <a href="https://www.linkedin.com/in/rayyan-syed-5a846725a/">LinkedIn</a></p>
